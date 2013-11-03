@@ -304,7 +304,7 @@ func (m *minifier) run() {
 	}
 }
 
-// Minify returns a minified string or an error.
+// Minify returns a minified script or an error.
 func Minify(script []byte) (minified []byte, err error) {
 	var buf bytes.Buffer
 	w := bufio.NewWriter(&buf)
