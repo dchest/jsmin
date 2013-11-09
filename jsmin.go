@@ -131,6 +131,32 @@ func (m *minifier) next() int {
 			}
 		case '*':
 			m.get()
+			// Preserve license comments (/*!)
+			if m.peek() == '!' {
+				m.get()
+				m.putc('/')
+				m.putc('*')
+				m.putc('!')
+				for c != 0 {
+					c = m.get()
+					switch c {
+					case '*':
+						if m.peek() == '/' {
+							m.get()
+							c = 0
+						}
+						break
+					case eof:
+						m.error("Unterminated comment.")
+						return eof
+					default:
+						m.putc(c)
+					}
+				}
+				m.putc('*')
+				m.putc('/')
+			}
+			// --
 			for c != ' ' {
 				switch m.get() {
 				case '*':
