@@ -6,6 +6,8 @@ import (
 
 const before = `// is.js
 
+/*! License */
+
 // (c) 2001 Douglas Crockford
 // 2001 June 3
 
@@ -37,7 +39,8 @@ if (is.ua.indexOf('gecko') &gt;= 0) {
     is.gecko = true;
 }`
 
-const after = `var is={ie:navigator.appName=='Microsoft Internet Explorer',java:navigator.javaEnabled(),ns:navigator.appName=='Netscape',ua:navigator.userAgent.toLowerCase(),version:parseFloat(navigator.appVersion.substr(21))||parseFloat(navigator.appVersion),win:navigator.platform=='Win32'}
+const after = `/*! License */
+var is={ie:navigator.appName=='Microsoft Internet Explorer',java:navigator.javaEnabled(),ns:navigator.appName=='Netscape',ua:navigator.userAgent.toLowerCase(),version:parseFloat(navigator.appVersion.substr(21))||parseFloat(navigator.appVersion),win:navigator.platform=='Win32'}
 is.mac=is.ua.indexOf('mac')&gt;=0;if(is.ua.indexOf('opera')&gt;=0){is.ie=is.ns=false;is.opera=true;}
 if(is.ua.indexOf('gecko')&gt;=0){is.ie=is.ns=false;is.gecko=true;}`
 

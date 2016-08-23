@@ -145,7 +145,6 @@ func (m *minifier) next() int {
 							m.get()
 							c = 0
 						}
-						break
 					case eof:
 						m.error("Unterminated comment.")
 						return eof
@@ -155,6 +154,7 @@ func (m *minifier) next() int {
 				}
 				m.putc('*')
 				m.putc('/')
+				c = ' '
 			}
 			// --
 			for c != ' ' {
@@ -164,7 +164,6 @@ func (m *minifier) next() int {
 						m.get()
 						c = ' '
 					}
-					break
 				case eof:
 					m.error("Unterminated comment.")
 					return eof
