@@ -37,7 +37,6 @@ import (
 	"bytes"
 	"fmt"
 	"io"
-	"log"
 )
 
 const eof = -1
@@ -64,7 +63,6 @@ func (m *minifier) init(r *bufio.Reader, w *bufio.Writer) {
 
 func (m *minifier) error(s string) error {
 	m.err = fmt.Errorf("JSMIN Error: %s", s)
-	log.Fatal(s)
 	return m.err
 }
 
@@ -181,12 +179,14 @@ func (m *minifier) next() int {
 	return c
 }
 
-/* action -- do something! What you do is determined by the argument:
-        1   Output A. Copy B to A. Get the next B.
-        2   Copy B to A. Get the next B. (Delete A).
-        3   Get the next B. (Delete B).
-   action treats a string as a single character. Wow!
-   action recognizes a regular expression if it is preceded by ( or , or =.
+/*
+action -- do something! What you do is determined by the argument:
+
+	     1   Output A. Copy B to A. Get the next B.
+	     2   Copy B to A. Get the next B. (Delete A).
+	     3   Get the next B. (Delete B).
+	action treats a string as a single character. Wow!
+	action recognizes a regular expression if it is preceded by ( or , or =.
 */
 func (m *minifier) putc(c int) {
 	m.w.WriteByte(byte(c))
